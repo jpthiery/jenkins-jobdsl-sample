@@ -9,7 +9,11 @@ job('seed') {
     }
   }
   parameters {
-    choiceParam("COMMIT_REFERENCE", ['master', 'seedv1'])
+    choiceParam(
+      "COMMIT_REFERENCE",
+      ['master', 'seedv3'],
+      'Commit reference to use to run this job.'
+    )
   }
   label('jkmaster')
   steps {
