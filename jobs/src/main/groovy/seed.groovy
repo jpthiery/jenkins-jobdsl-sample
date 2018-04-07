@@ -4,12 +4,12 @@ job('seed') {
       remote {
         name('origin')
         url('https://github.com/jpthiery/jenkins-jobdsl-sample.git')
-        branch('master')
+        branch('${COMMIT_REFERENCE}')
       }
     }
   }
-  triggers {
-    scm 'H/2 * * * *'
+  parameters {
+    choiceParam("COMMIT_REFERENCE", ['master', 'seedv1'])
   }
   label('jkmaster')
   steps {
