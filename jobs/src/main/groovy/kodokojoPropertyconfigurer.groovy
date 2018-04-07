@@ -10,9 +10,9 @@ job('property-configurer') {
       }
     }
   }
-  label('docker')
+  label('jkmaster')
   steps {
-    shell 'mvn clean verify'
+    shell 'docker run --rm -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3-jdk-9-slim /bin/bash -c "mvn clean verify"'
   }
   logRotator(15, 10)
 }
