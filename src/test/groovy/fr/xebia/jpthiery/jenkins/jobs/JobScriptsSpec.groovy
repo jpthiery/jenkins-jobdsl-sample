@@ -1,4 +1,4 @@
-package fr.xebia.jpthier.jenkins.jobs
+package fr.xebia.jpthiery.jenkins.jobs
 
 import hudson.model.Item
 import hudson.model.View

@@ -1,4 +1,4 @@
-package fr.xebia.jpthier.jenkins.jobs
+package fr.xebia.jpthiery.jenkins.jobs
 
 import groovy.text.SimpleTemplateEngine
 import groovy.text.Template
