@@ -1,6 +1,6 @@
 import groovy.json.JsonSlurper
 
-url = "https://api.github.com/repos/${repository}${project}/branches"
+url = "https://api.github.com/repos/${repository}/${project}/branches"
 
 branches = []
 
