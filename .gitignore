@@ -1,7 +1,7 @@
-build
+/build
 .gradle
 .idea
 *.iml
-out
-target
-jenkins
+/out
+/target
+/jenkins

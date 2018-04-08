@@ -1,0 +1,25 @@
+package fr.xebia.jpthiery.jenkins.jobs
+
+class MavenJobBuilder<T extends MavenJobBuilder>  extends JobBuilder<T>  {
+
+  MavenJobBuilder(String jobName) {
+    super(jobName)
+  }
+
+  T mvnCmd(String mvnCmd) {
+    addStep {
+      ctx ->
+        ctx.shell """
+                  | rm -f target || true
+                  | containerId=\$(docker create --rm -w /usr/src/mymaven maven:3-jdk-9-slim /bin/bash -c "${mvnCmd}")
+                  | docker cp /home/jpthiery/worskapce/xke/jenkins-job-dsl-sample/jenkins/workspace/${jobName} \${containerId}:/usr/src/mymaven
+                  | docker start -a
+                  | mkdir target
+                  | docker cp \${containerId}:/usr/src/mymaven/target/ target/
+                  """.stripMargin()
+    }
+    this
+  }
+
+}
+
