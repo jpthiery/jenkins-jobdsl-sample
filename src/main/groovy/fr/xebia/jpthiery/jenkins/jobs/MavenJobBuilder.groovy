@@ -17,6 +17,7 @@ class MavenJobBuilder<T extends MavenJobBuilder>  extends JobBuilder<T>  {
                   |docker cp /var/jenkins_home/workspace/${jobName}/. \${containerId}:/usr/src/mymaven/
                   |docker start -a \${containerId}
                   |docker cp \${containerId}:/usr/src/mymaven/target/. target
+                  |docker rm \${containerId}
                   """.stripMargin()
     }
     this
