@@ -1,6 +1,6 @@
 package fr.xebia.jpthiery.jenkins.jobs
 
-class MavenJobBuilder<T extends MavenJobBuilder>  extends JobBuilder<T>  {
+class MavenJobBuilder<T extends MavenJobBuilder> extends JobBuilder<T> {
 
   MavenJobBuilder(String jobName) {
     super(jobName)
@@ -22,6 +22,30 @@ class MavenJobBuilder<T extends MavenJobBuilder>  extends JobBuilder<T>  {
     }
     this
   }
+
+  T lookupGithubBranch(String repository, String projectName) {
+    this.parameters {
+      ctx ->
+        ctx.extensibleChoiceParameterDefinition {
+          name('BRANCH')
+          editable(false)
+          description('Which branch to execute.')
+          choiceListProvider {
+            systemGroovyChoiceListProvider {
+              usePredefinedVariables(true)
+              defaultChoice('master')
+              groovyScript {
+                script(loadTemplate('list_github_branches.groovy').make(repository: repository, project: projectName).toString())
+                sandbox(false)
+              }
+            }
+          }
+        }
+    }
+    this.branchName = '$BRANCH'
+    this
+  }
+
 
 }
 
