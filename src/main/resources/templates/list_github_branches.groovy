@@ -6,7 +6,9 @@ branches = []
 
 URLConnection connection = new URL(url).openConnection()
 response = new JsonSlurper().parse(new BufferedReader(new InputStreamReader(connection.getInputStream())))
-branches = response.value
+
+
+branches = response
   .collect { it.name }
   .sort()
 
